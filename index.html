@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Akademi - AI Görsel Üretici</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 { color: #00d2ff; margin-bottom: 10px; font-size: 2em; }
+        .energy-cells { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .cell { width: 50px; height: 8px; background: #333; border-radius: 4px; transition: 0.5s; }
+        .cell.active { background: #00ff00; box-shadow: 0 0 15px #00ff00; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #aaa; }
+        textarea, select {
+            width: 100%; padding: 15px; background: #0f3460; border: 1px solid #16213e;
+            border-radius: 12px; color: white; font-size: 1em;
+        }
+        .generate-btn {
+            background: #e94560; color: white; border: none; padding: 18px;
+            border-radius: 12px; font-size: 1.2em; font-weight: bold;
+            cursor: pointer; width: 100%; transition: 0.3s;
+        }
+        .generate-btn:hover { transform: translateY(-3px); background: #ff4d6d; }
+        .popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 1000;
+        }
+        .popup-content {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: #1a1a2e; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center;
+        }
+        .video-button {
+            background: #ff0000; color: white; border: none; padding: 15px;
+            border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; margin: 15px 0;
+        }
+        .progress-bar { width: 100%; height: 10px; background: #333; border-radius: 5px; overflow: hidden; margin-top: 15px; }
+        .progress-fill { height: 100%; background: #00ff00; width: 0%; transition: 1s linear; }
+        .result-container { display: none; margin-top: 30px; background: #0f3460; padding: 20px; border-radius: 15px; }
+        #resultText { font-size: 0.9em; line-height: 1.6; color: #00d2ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌌 Jarvis Akademi</h1>
+        <div class="energy-cells" id="energyCells">
+            <div class="cell active"></div>
+            <div class="cell active"></div>
+            <div class="cell active"></div>
+        </div>
+        
+        <div class="input-group">
+            <label>🖼️ Hayalindeki Görseli Tarif Et</label>
+            <textarea id="description" placeholder="Örnek: Siber bir şehirde saksafon çalan robot..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>🎨 Stil</label>
+            <select id="style">
+                <option value="realistic">Gerçekçi</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="anime">Anime</option>
+            </select>
+        </div>
+
+        <button class="generate-btn" onclick="generatePrompt()">✨ Prompt Oluştur</button>
+
+        <div class="result-container" id="resultContainer">
+            <div id="resultText"></div>
+            <button onclick="copyResult()" style="margin-top:10px; padding:5px; cursor:pointer;">📋 Kopyala</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <h3>🎬 Enerji Gerekiyor</h3>
+            <p>Devam etmek için 13 saniyelik videoyu izle.</p>
+            <button class="video-button" id="vBtn" onclick="openVideo()">▶️ YouTube Shorts Aç</button>
+            <button class="video-button" id="cBtn" onclick="startCountdown()" style="display:none; background:#4CAF50;">✅ İzledim, Devam Et</button>
+            <div class="progress-bar" id="pBar" style="display:none;"><div class="progress-fill" id="pFill"></div></div>
+            <div id="timer" style="margin-top:10px; font-weight:bold;"></div>
+        </div>
+    </div>
+
+    <script>
+        const youtubeVideos = ['6bd0a3p_qNs','5mVvlMPRg9U','AGBZYvXJpRg','i1Mw4b_ivYo','Zpr3aoAbRqU'];
+        let userRights = localStorage.getItem('j_rights') ? parseInt(localStorage.getItem('j_rights')) : 3;
+
+        function updateCells() {
+            document.querySelectorAll('.cell').forEach((c, i) => c.classList.toggle('active', i < userRights));
+        }
+
+        function generatePrompt() {
+            if (userRights <= 0) { alert("Sistem enerjisi tükendi. 24 saat bekleyin."); return; }
+            if (!document.getElementById('description').value) { alert("Tarif yazın!"); return; }
+            document.getElementById('popupOverlay').style.display = 'block';
+        }
+
+        function openVideo() {
+            window.open(`https://www.youtube.com/shorts/${youtubeVideos[Math.floor(Math.random()*youtubeVideos.length)]}`, '_blank');
+            document.getElementById('vBtn').style.display = 'none';
+            document.getElementById('cBtn').style.display = 'block';
+        }
+
+        function startCountdown() {
+            document.getElementById('cBtn').style.display = 'none';
+            document.getElementById('pBar').style.display = 'block';
+            let time = 13;
+            const int = setInterval(() => {
+                time--;
+                document.getElementById('pFill').style.width = ((13-time)/13*100) + '%';
+                document.getElementById('timer').textContent = time + " sn";
+                if(time <= 0) {
+                    clearInterval(int);
+                    finish();
+                }
+            }, 1000);
+        }
+
+        function finish() {
+            document.getElementById('popupOverlay').style.display = 'none';
+            userRights--;
+            localStorage.setItem('j_rights', userRights);
+            updateCells();
+            document.getElementById('resultText').textContent = document.getElementById('description').value + " - Jarvis Optimized Prompt: High quality, 8k, detailed.";
+            document.getElementById('resultContainer').style.display = 'block';
+        }
+
+        updateCells();
+    </script>
+</body>
+</html>
