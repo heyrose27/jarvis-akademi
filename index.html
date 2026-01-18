@@ -2,41 +2,53 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Jarvis Heyrose - Sistem</title>
+    <title>Jarvis Heyrose</title>
     <style>
-        body { margin:0; background:#000; color:#0f0; font-family:monospace; display:flex; justify-content:center; align-items:center; min-height:100vh; overflow:hidden; }
-        #login-screen { text-align:center; }
-        #login-screen img { max-width:100%; height:auto; border:2px solid #0f0; box-shadow: 0 0 20px #0f0; cursor:pointer; }
-        #app-screen { display:none; width:90%; max-width:600px; padding:20px; border:1px solid #0f0; background:rgba(0,20,0,0.9); }
-        .energy { display:flex; gap:10px; margin-bottom:20px; }
-        .cell { width:30%; height:10px; background:#111; border:1px solid #0f0; }
-        .cell.active { background:#0f0; box-shadow:0 0 10px #0f0; }
-        textarea { width:100%; background:#000; color:#0f0; border:1px solid #0f0; padding:10px; margin:10px 0; }
-        button { background:#0f0; color:#000; border:none; padding:15px 30px; font-weight:bold; cursor:pointer; width:100%; }
-        /* Popup ve diğer stiller buraya gelecek */
+        body {
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .login-box {
+            text-align: center;
+            border: 2px solid #00ff00;
+            padding: 50px;
+            box-shadow: 0 0 20px #00ff00;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 3em;
+            letter-spacing: 10px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        button {
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 30px #00ff00;
+        }
     </style>
 </head>
 <body>
-
-    <div id="login-screen">
-        <img src="senin-resmin-adresi.jpg" onclick="enterSystem()" alt="JARVIS GİRİŞ">
-        <p>SİSTEME GİRİŞ YAPMAK İÇİN RESME TIKLAYIN</p>
+    <div class="login-box">
+        <h1>JARVIS HEYROSE</h1>
+        <button onclick="alert('Sisteme Erişiliyor...')">SİSTEME GİRİŞ YAP</button>
     </div>
-
-    <div id="app-screen">
-        <div class="energy" id="cells">
-            <div class="cell active"></div><div class="cell active"></div><div class="cell active"></div>
-        </div>
-        <textarea id="prompt" placeholder="Görsel tarifini yazın..."></textarea>
-        <button onclick="generate()">PROMPT ÜRET</button>
-    </div>
-
-    <script>
-        function enterSystem() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('app-screen').style.display = 'block';
-        }
-        // Daha önce verdiğim hak ve video kodları burada devam edecek...
-    </script>
 </body>
 </html>
