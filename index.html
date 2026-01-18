@@ -4,51 +4,41 @@
     <meta charset="UTF-8">
     <title>Jarvis Heyrose</title>
     <style>
-        body {
-            background-color: #000;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        .login-box {
-            text-align: center;
-            border: 2px solid #00ff00;
-            padding: 50px;
-            box-shadow: 0 0 20px #00ff00;
-            border-radius: 10px;
-        }
-        h1 {
-            font-size: 3em;
-            letter-spacing: 10px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px #00ff00;
-        }
-        button {
-            background: transparent;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #00ff00;
-            color: #000;
-            box-shadow: 0 0 30px #00ff00;
-        }
+        body { background-color: #000; color: #00ff00; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        /* Giriş Ekranı */
+        #loginScreen { text-align: center; border: 2px solid #00ff00; padding: 50px; box-shadow: 0 0 20px #00ff00; border-radius: 10px; }
+        h1 { font-size: 3em; letter-spacing: 10px; margin-bottom: 30px; text-shadow: 0 0 10px #00ff00; }
+        button { background: transparent; color: #00ff00; border: 2px solid #00ff00; padding: 15px 30px; font-size: 1.2em; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #00ff00; color: #000; box-shadow: 0 0 30px #00ff00; }
+        /* Ana Panel */
+        #mainPanel { display: none; width: 90%; max-width: 600px; border: 1px solid #00ff00; padding: 20px; box-shadow: 0 0 15px #00ff00; }
+        .cells { display: flex; gap: 10px; margin-bottom: 20px; }
+        .cell { width: 40px; height: 10px; border: 1px solid #00ff00; }
+        .active { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+        textarea { width: 100%; background: #000; color: #00ff00; border: 1px solid #00ff00; padding: 10px; margin: 10px 0; }
     </style>
 </head>
 <body>
-    <div class="login-box">
+
+    <div id="loginScreen">
         <h1>JARVIS HEYROSE</h1>
-        <button onclick="alert('Sisteme Erişiliyor...')">SİSTEME GİRİŞ YAP</button>
+        <button onclick="enterSystem()">SİSTEME GİRİŞ YAP</button>
     </div>
+
+    <div id="mainPanel">
+        <div class="cells">
+            <div class="cell active"></div><div class="cell active"></div><div class="cell active"></div>
+        </div>
+        <p>> SİSTEM ÇALIŞIYOR...</p>
+        <textarea id="prompt" rows="4" placeholder="Görsel tarifini buraya yaz..."></textarea>
+        <button onclick="alert('İşlem Başlatıldı')">PROMPT OLUŞTUR</button>
+    </div>
+
+    <script>
+        function enterSystem() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainPanel').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
