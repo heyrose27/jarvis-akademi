@@ -12,8 +12,8 @@
       --border:rgba(255,255,255,.08);
       --text:#e6edf6;
       --muted:#a9b4c3;
-      --accent:#7c3aed; /* mor */
-      --accent2:#22c55e; /* yeşil */
+      --accent:#7c3aed;
+      --accent2:#22c55e;
       --shadow: 0 10px 30px rgba(0,0,0,.55);
       --radius:16px;
     }
@@ -28,10 +28,7 @@
       height:100vh;
       overflow:hidden;
     }
-
     .app{display:flex; height:100vh; width:100vw;}
-
-    /* Sidebar */
     .sidebar{
       width:260px;
       padding:18px 14px;
@@ -52,7 +49,6 @@
     }
     .brand h1{font-size:14px; margin:0; letter-spacing:.6px}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
-
     .nav{
       display:flex; flex-direction:column; gap:6px;
       padding:0 6px;
@@ -103,16 +99,12 @@
       font-size:12px;
     }
     .miniBtn:hover{border-color: rgba(255,255,255,.14)}
-
-    /* Main */
     .main{
       flex:1;
       display:flex;
       flex-direction:column;
       min-width:0;
     }
-
-    /* Top bar */
     .topbar{
       height:64px;
       display:flex;
@@ -168,13 +160,11 @@
       font-size:13px;
     }
     .loginBtn:hover{background: rgba(124,58,237,.28)}
-
-    /* Content */
     .content{
       flex:1;
       overflow:auto;
       padding:18px;
-      padding-bottom:120px; /* prompt bar için boşluk */
+      padding-bottom:120px;
     }
     .pageTitle{
       display:flex; align-items:flex-end; justify-content:space-between;
@@ -183,7 +173,6 @@
     }
     .pageTitle h2{margin:0; font-size:20px}
     .pageTitle p{margin:0; color:var(--muted); font-size:13px}
-
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -245,8 +234,6 @@
       font-size:13px;
     }
     .ghost:hover{border-color: rgba(255,255,255,.18)}
-
-    /* Prompt Bar */
     .promptBar{
       position:fixed;
       left:260px;
@@ -303,8 +290,6 @@
       font-size:13px;
       white-space:nowrap;
     }
-
-    /* Promo Modal */
     .modalBackdrop{
       position:fixed; inset:0;
       background: rgba(0,0,0,.60);
@@ -343,8 +328,6 @@
       padding:12px 14px 14px;
       border-top:1px solid rgba(255,255,255,.08);
     }
-
-    /* Responsive */
     @media (max-width: 980px){
       .sidebar{width:220px}
       .promptBar{left:220px}
@@ -368,7 +351,6 @@
 
 <body>
   <div class="app">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
@@ -396,9 +378,7 @@
       </div>
     </aside>
 
-    <!-- MAIN -->
     <main class="main">
-      <!-- TOPBAR -->
       <header class="topbar">
         <div class="tabs" id="tabs">
           <button class="tab active" data-tab="hepsi">Hepsi</button>
@@ -414,10 +394,7 @@
         </div>
       </header>
 
-      <!-- CONTENT -->
       <section class="content">
-
-        <!-- PAGES -->
         <div id="page-ai-tools" class="page">
           <div class="pageTitle">
             <div>
@@ -502,26 +479,6 @@
           </div>
         </div>
 
-        <div id="page-ders-30dk" class="page" style="display:none">
-          <div class="pageTitle">
-            <div>
-              <h2>Ders 30dk</h2>
-              <p>25 dk çalışma + 5 dk mola (placeholder)</p>
-            </div>
-          </div>
-          <div class="card" style="grid-column: span 12; max-width:800px">
-            <div class="cardHeader"><strong>Pomodoro</strong><span class="tag" id="timerState">Hazır</span></div>
-            <div class="cardBody">
-              <div style="font-size:44px; font-weight:900; letter-spacing:2px" id="timer">25:00</div>
-              <p class="hint">Start ile başlat. Bu sadece örnek timer, istersek konu seçimi/soru ekleriz.</p>
-            </div>
-            <div class="cardFooter">
-              <button class="primary" id="startTimer">Start</button>
-              <button class="ghost" id="resetTimer">Reset</button>
-            </div>
-          </div>
-        </div>
-
         <div id="page-baslik" class="page" style="display:none">
           <div class="pageTitle"><div><h2>Başlık</h2><p>SEO başlık üretimi (placeholder)</p></div></div>
         </div>
@@ -547,10 +504,8 @@
             </div>
           </div>
         </div>
-
       </section>
 
-      <!-- PROMPT BAR -->
       <div class="promptBar">
         <div class="promptInner">
           <button class="modeSelect" id="modeBtn">Mod: Prompt</button>
@@ -561,15 +516,14 @@
     </main>
   </div>
 
-  <!-- PROMO MODAL -->
   <div class="modalBackdrop" id="promoModal">
     <div class="modal">
       <div class="modalTop">
         <h3>13 sn Tanıtım Videosu</h3>
         <button class="xBtn" onclick="closePromo()">✕</button>
       </div>
+
       <div class="modalBody">
-        <!-- YouTube embed placeholder -->
         <div style="aspect-ratio:16/9; width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10); border-radius:14px; display:grid; place-items:center;">
           <div style="text-align:center; color:var(--muted); font-size:13px; padding:14px;">
             Buraya YouTube embed gelecek.<br/>
@@ -578,6 +532,7 @@
         </div>
         <p class="hint">İzle butonuna basınca “full hak” mantığı (backend ile) bağlanır.</p>
       </div>
+
       <div class="modalActions">
         <button class="ghost" onclick="closePromo()">Atla</button>
         <button class="primary" onclick="watchedPromo()">İzle</button>
@@ -586,11 +541,35 @@
   </div>
 
   <script>
+    // YOUTUBE ID LISTESI (DOGRU YER)
+    const youtubeVideos = [
+      "6bd0a3p_qNs",
+      "5mVvlMPRg9U",
+      "AGBZYvXJpRg",
+      "i1Mw4b_ivYo",
+      "Zpr3aoAbRqU",
+      "_CelSfEJkz0",
+      "OZ99DyKxvYA",
+      "Dl9cDx3rouU",
+      "e_1id0_LN68",
+      "fg-4bpIAVl0",
+      "-hJZQcd0gKI",
+      "KypCc3Gq6Yo"
+    ];
+
+    function getRandomVideoId(){
+      return youtubeVideos[Math.floor(Math.random() * youtubeVideos.length)];
+    }
+
+    function openRandomShort(){
+      const id = getRandomVideoId();
+      window.open(`https://www.youtube.com/shorts/${id}`, "_blank");
+    }
+
     // --- SIMPLE ROUTER (pages) ---
     const nav = document.getElementById('nav');
     const pages = {
       "ai-tools": document.getElementById('page-ai-tools'),
-      "ders-30dk": document.getElementById('page-ders-30dk'),
       "baslik": document.getElementById('page-baslik'),
       "hashtag": document.getElementById('page-hashtag'),
       "gorsel": document.getElementById('page-gorsel'),
@@ -609,16 +588,15 @@
       goPage(btn.dataset.page);
     });
 
-    // --- TOP TABS (placeholder filtering) ---
+    // --- TOP TABS ---
     document.getElementById('tabs').addEventListener('click', (e)=>{
       const t = e.target.closest('.tab');
       if(!t) return;
       [...document.querySelectorAll('.tab')].forEach(x=>x.classList.remove('active'));
       t.classList.add('active');
-      // Filtreleme burada yapılır (istersen eklerim)
     });
 
-    // --- MODE (prompt / baslik / hashtag / gorsel) ---
+    // --- MODE ---
     let mode = 'prompt';
     const modeBtn = document.getElementById('modeBtn');
     function setMode(m){
@@ -632,11 +610,12 @@
       setMode(order[idx]);
     });
 
-    // --- SEND (placeholder) ---
+    // --- SEND (PROMO + RANDOM SHORT) ---
     document.getElementById('sendBtn').addEventListener('click', ()=>{
       const txt = document.getElementById('promptInput').value.trim();
       if(!txt) return alert('Bir şey yaz.');
-      alert('Şu an sadece tasarım. Backend bağlayınca: ' + mode + ' üretilecek.');
+      openPromo();           // popup aç
+      openRandomShort();     // random shorts aç
     });
 
     // --- PROMO MODAL ---
@@ -645,8 +624,9 @@
     function closePromo(){ promoModal.style.display = 'none'; }
     function watchedPromo(){
       closePromo();
-      alert('İzlendi işaretlendi (placeholder). Backend ile burada full hak verilir.');
+      alert('İzlendi (placeholder). Sonra burada üretim sonucu gösterilecek.');
     }
+
     window.openPromo = openPromo;
     window.closePromo = closePromo;
     window.watchedPromo = watchedPromo;
@@ -656,49 +636,6 @@
     document.getElementById('promoBtn').addEventListener('click', openPromo);
     document.getElementById('helpBtn').addEventListener('click', ()=>alert('Yardım: Menüden sayfa seç, alttan komut yaz.'));
     document.getElementById('loginBtn').addEventListener('click', ()=>alert('Google login (Supabase) sonraki adım.'));
-
-    // --- SIMPLE POMODORO (25/5) ---
-    let timerInt = null;
-    let seconds = 25*60;
-    let working = true;
-
-    function renderTimer(){
-      const m = String(Math.floor(seconds/60)).padStart(2,'0');
-      const s = String(seconds%60).padStart(2,'0');
-      document.getElementById('timer').textContent = `${m}:${s}`;
-      document.getElementById('timerState').textContent = working ? 'Çalışma' : 'Mola';
-    }
-    function resetTimer(){
-      clearInterval(timerInt); timerInt=null;
-      working = true; seconds = 25*60; renderTimer();
-    }
-    document.getElementById('startTimer').addEventListener('click', ()=>{
-      if(timerInt) return;
-      timerInt = setInterval(()=>{
-        seconds--;
-        if(seconds <= 0){
-          working = !working;
-          seconds = working ? 25*60 : 5*60;
-        }
-        renderTimer();
-      }, 1000);
-    });
-    document.getElementById('resetTimer').addEventListener('click', resetTimer);
-    renderTimer();
   </script>
 </body>
 </html>
-const youtubeVideos = [
-  "6bd0a3p_qNs",
-  "5mVvlMPRg9U",
-  "AGBZYvXJpRg",
-  "i1Mw4b_ivYo",
-  "Zpr3aoAbRqU",
-  "_CelSfEJkz0",
-  "OZ99DyKxvYA",
-  "Dl9cDx3rouU",
-  "e_1id0_LN68",
-  "fg-4bpIAVl0",
-  "-hJZQcd0gKI",
-  "KypCc3Gq6Yo"
-];
